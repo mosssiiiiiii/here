@@ -3,7 +3,6 @@ const Dotenv = require('dotenv-webpack')
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const srcDir = path.join(__dirname, './../../src');
-const distDir = path.join(__dirname, './../../dist/');
 
 
 
@@ -68,7 +67,7 @@ const client = {
     },
     plugins: [
         new MiniCssExtractPlugin({
-            filename: 'styles.scss'
+            filename: 'styles.css'
         }),
         new Dotenv({systemvars: true}),
         new webpack.HotModuleReplacementPlugin(),

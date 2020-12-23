@@ -58,7 +58,7 @@ const client = {
         },
         plugins: [
             new MiniCssExtractPlugin({
-                filename: 'styles.scss'
+                filename: 'styles.css'
             }),
             new Dotenv({systemvars: true}),
             new webpack.optimize.OccurrenceOrderPlugin(),

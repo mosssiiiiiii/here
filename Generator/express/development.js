@@ -1,3 +1,6 @@
+process.env.NODE_ENV = 'development';
+require('../setup/envLoader');
+
 const express = require('express');
 const app = express();
 const webpack = require('webpack');
