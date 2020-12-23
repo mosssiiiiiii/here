@@ -3,16 +3,18 @@ const Dotenv = require('dotenv-webpack')
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const srcDir = path.join(__dirname, './../../src');
-const distDir = path.join(__dirname, './../dist');
+const distDir = path.join(__dirname, './../../dist/');
+
+
 
 const client = {
     name: 'client',
     mode:'development',
     target: 'web',
-    entry: ['webpack-hot-middleware/client?name=client&reload=true', `${srcDir}/client.js`],
+    entry: ['webpack-hot-middleware/client?name=client&reload=true', `${srcDir}/render/client.js`],
     output: {
         filename: 'client.js',
-        publicPath: distDir,
+        publicPath: '/dist/',
     },
     devtool: 'source-map',
     module: {
@@ -40,7 +42,7 @@ const client = {
             },
             {
               test: /\.(css|scss)$/,
-              use: [
+                use: [
                   {
                       loader: 'css-hot-loader?cssModule=true',
                   },
@@ -54,16 +56,23 @@ const client = {
                           importLoaders: 1
                       }
                   },
+                  {
+                      loader: 'sass-loader',
+                      options: {
+                          sourceMap: true,
+                      }
+                  }
               ]
           },
         ],
     },
     plugins: [
         new MiniCssExtractPlugin({
-            filename: 'styles.css'
+            filename: 'styles.scss'
         }),
         new Dotenv({systemvars: true}),
         new webpack.HotModuleReplacementPlugin(),
+        new webpack.optimize.OccurrenceOrderPlugin(),
     ]
 };
 
@@ -71,11 +80,11 @@ const server =     {
     name: 'server',
     mode:'development',
     target: 'node',
-    entry: ['webpack-hot-middleware/client?name=server&reload=true', `${srcDir}/server.js`],
+    entry: ['webpack-hot-middleware/client?name=server&reload=true', `${srcDir}/render/server.js`],
     output: {
         filename: 'server.js',
         libraryTarget: 'commonjs2',
-        publicPath: path.resolve(process.cwd(), '.' + '/dist'),
+        publicPath: '/dist/',
     },
     resolve: {
         extensions: ['.js', '.jsx']
@@ -103,11 +112,32 @@ const server =     {
                     }
                 ],
             },
-
+            {
+                test: /\.(css|scss)$/,
+                use: [
+                    {
+                        loader: 'isomorphic-style-loader',
+                    },
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            sourceMap: true,
+                            importLoaders: 1
+                        }
+                    },
+                    {
+                        loader: 'sass-loader',
+                        options: {
+                            sourceMap: true,
+                        }
+                    }
+                ]
+            }
         ],
     },
     plugins: [
-        new webpack.HotModuleReplacementPlugin()
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.optimize.OccurrenceOrderPlugin(),
     ]
 }
 

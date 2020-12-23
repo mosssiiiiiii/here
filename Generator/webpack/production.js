@@ -4,8 +4,8 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const StatsPlugin = require('stats-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 const TerserPlugin = require('terser-webpack-plugin');
-const distDir = path.resolve(process.cwd(), './dist');
-const srcDir = path.resolve(process.cwd(), './src');
+const distDir = path.resolve(process.cwd(), './dist/');
+const srcDir = path.resolve(process.cwd(), './src/');
 
 const client = {
         name: 'client',
@@ -49,7 +49,7 @@ const client = {
                             options: {
                                 // sourceMap: true,
                                 outputStyle: 'compressed',
-                                includePaths: [`${srcDir}/App/App/_style/module`]
+                                // includePaths: [`${srcDir}/App/App/_style/module`]
                             }
                         }
                     ]
@@ -58,7 +58,7 @@ const client = {
         },
         plugins: [
             new MiniCssExtractPlugin({
-                filename: 'styles.css'
+                filename: 'styles.scss'
             }),
             new Dotenv({systemvars: true}),
             new webpack.optimize.OccurrenceOrderPlugin(),
@@ -124,7 +124,7 @@ const server = {
                         options: {
                             // sourceMap: true,
                             outputStyle: 'compressed',
-                            includePaths: [`${srcDir}/App/App/_style/module`]
+                            // includePaths: [`${srcDir}/App/App/_style/module`]
                         }
                     }
                 ]
