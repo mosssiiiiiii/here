@@ -18,11 +18,8 @@ const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, error => {
     if (error) {
-
         return console.error('this is just an error',error);
-
     } else {
-
         console.log(`Development Express server running at http://localhost:${PORT}`);
     }
 });

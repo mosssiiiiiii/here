@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "description": "This project is just for doing Here's project for the front-end job position",
   "scripts": {
-    "dev": "node Generator/express/development.js",
-    "build": "Generator/webpack -p --config ./webpack/production.js --progress --profile --colors",
+    "dev": "node generator/express/development.js",
+    "build": "webpack -p --config ./generator/webpack/production.js --progress --profile --colors",
+    "start" : "node ./generator/express/production.js ",
     "test": "jest"
   },
   "author": "mohsen haghighatkhah",
