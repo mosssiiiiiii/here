@@ -6,6 +6,9 @@ const ServerRendererPath = path.join(__dirname, './../../dist/server.js');
 const ServerRenderer = require(ServerRendererPath).default;
 const Stats = require(ClientStatsPath);
 
+// static files
+app.use(express.static('public'));
+
 app.use('/dist', express.static(path.join(__dirname, '../dist')));
 app.use(ServerRenderer(Stats));
 
