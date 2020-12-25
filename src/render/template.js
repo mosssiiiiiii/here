@@ -3,6 +3,7 @@ export default ({markup, helmet}) => {
           <html ${helmet.htmlAttributes.toString()}>
              <head>
                 <link rel="stylesheet" type="text/css" href="/dist/styles.css" />
+                <link rel="shortcut icon" href="/favicon.ico" type="image/icon" />
                 ${helmet.title.toString()}
                 ${helmet.meta.toString()}
                 ${helmet.link.toString()}              

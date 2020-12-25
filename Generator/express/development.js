@@ -10,6 +10,10 @@ const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 const webpackHotServerMiddleware = require('webpack-hot-server-middleware');
 
+// static files
+app.use(express.static('public'));
+
+
 app.use(webpackDevMiddleware(compiler, {
     serverSideRender: true,
     publicPath: "/dist/",

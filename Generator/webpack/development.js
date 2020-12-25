@@ -4,7 +4,6 @@ const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const srcDir = path.join(__dirname, './../../src');
 
-
 const client = {
     name: 'client',
     mode: 'development',
