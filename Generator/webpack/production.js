@@ -4,7 +4,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const StatsPlugin = require('stats-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 const TerserPlugin = require('terser-webpack-plugin');
-const distDir = path.resolve(process.cwd(), './dist/');
+const distDir = path.resolve(process.cwd(), './dist');
 const srcDir = path.resolve(process.cwd(), './src/render');
 
 const client = {
@@ -63,7 +63,6 @@ const client = {
                 filename: 'styles.css'
             }),
             new Dotenv({systemvars: true}),
-            new webpack.optimize.OccurrenceOrderPlugin(),
         ],
         optimization: {
             minimize: true,

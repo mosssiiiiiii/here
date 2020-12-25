@@ -2,6 +2,7 @@ export default ({markup, helmet}) => {
     return `<!DOCTYPE html>
           <html ${helmet.htmlAttributes.toString()}>
              <head>
+                <link rel="stylesheet" type="text/css" href="/dist/styles.css" />
                 ${helmet.title.toString()}
                 ${helmet.meta.toString()}
                 ${helmet.link.toString()}              

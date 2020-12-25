@@ -12,7 +12,7 @@ const client = {
     entry: ['webpack-hot-middleware/client?name=client&reload=true', `${srcDir}/render/client.js`],
     output: {
         filename: 'client.js',
-        publicPath: '/dist/',
+        publicPath: '/dist',
     },
     devtool: 'source-map',
     module: {
@@ -60,7 +60,6 @@ const client = {
                             sassOptions: {
                                 sourceMap: true,
                                 outputStyle: 'compressed',
-                                includePaths: path.resolve(process.cwd(), './src/App')
                             }
 
                         }
@@ -71,11 +70,10 @@ const client = {
     },
     plugins: [
         new MiniCssExtractPlugin({
-            filename: 'styles.scss'
+            filename: 'styles.css'
         }),
         new Dotenv({systemvars: true}),
         new webpack.HotModuleReplacementPlugin(),
-        new webpack.optimize.OccurrenceOrderPlugin(),
     ]
 };
 
@@ -120,7 +118,6 @@ const server = {
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
-        new webpack.optimize.OccurrenceOrderPlugin(),
     ]
 }
 
