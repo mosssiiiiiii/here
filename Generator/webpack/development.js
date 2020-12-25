@@ -1,14 +1,13 @@
 const webpack = require('webpack');
 const Dotenv = require('dotenv-webpack')
-const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const srcDir = path.join(__dirname, './../../src');
+
 
 const client = {
     name: 'client',
     mode: 'development',
     target: 'web',
-    entry: ['webpack-hot-middleware/client?name=client&reload=true', `${srcDir}/render/client.js`],
+    entry: ['webpack-hot-middleware/client?name=client&reload=true', `./src/render/client.js`],
     output: {
         filename: 'client.js',
         publicPath: '/dist',
@@ -20,22 +19,9 @@ const client = {
                 test: /\.(js|jsx)$/,
                 exclude: /(node_modules[\\\/])/,
                 use: [
-                    {
-                        loader: 'babel-loader',
-                        options: {
-                            presets: ["@babel/preset-env", "@babel/preset-react"],
-                            plugins: [
-                                "@babel/plugin-transform-runtime",
-                                "@babel/plugin-proposal-object-rest-spread",
-                                ["@babel/plugin-proposal-decorators", {"legacy": true}],
-                                ["@babel/plugin-proposal-class-properties", {"loose": true}]
-                            ]
-                        }
-                    },
-                    {
-                        loader: 'eslint-loader'
-                    }
-                ],
+                    "babel-loader",
+                    "eslint-loader"
+                ]
             },
             {
                 test: /\.(css|scss)$/,
@@ -44,7 +30,10 @@ const client = {
                         loader: 'css-hot-loader?cssModule=true',
                     },
                     {
-                        loader: MiniCssExtractPlugin.loader
+                        loader: MiniCssExtractPlugin.loader,
+                        options: {
+                            publicPath: '/public',
+                        },
                     },
                     {
                         loader: 'css-loader',
@@ -65,11 +54,27 @@ const client = {
                     }
                 ]
             },
+            {
+                test: /\.(png|jpg)$/,
+                loader: 'url-loader'
+            },
+            {
+                test: require.resolve("jquery"),
+                loader: "expose-loader",
+                options: {
+                    exposes: ["$", "jQuery"],
+                },
+            },
+
         ],
     },
     plugins: [
         new MiniCssExtractPlugin({
             filename: 'styles.css'
+        }),
+        new webpack.ProvidePlugin({
+            $: "jquery",
+            jQuery: "jquery"
         }),
         new Dotenv({systemvars: true}),
         new webpack.HotModuleReplacementPlugin(),
@@ -80,11 +85,11 @@ const server = {
     name: 'server',
     mode: 'development',
     target: 'node',
-    entry: ['webpack-hot-middleware/client?name=server&reload=true', `${srcDir}/render/server.js`],
+    entry: ['webpack-hot-middleware/client?name=server&reload=true', `./src/render/server.js`],
     output: {
         filename: 'server.js',
         libraryTarget: 'commonjs2',
-        publicPath: '/dist/',
+        publicPath: '/dist',
     },
     module: {
         rules: [
@@ -92,22 +97,9 @@ const server = {
                 test: /\.(js|jsx)$/,
                 exclude: /(node_modules[\\\/])/,
                 use: [
-                    {
-                        loader: 'babel-loader',
-                        options: {
-                            presets: ["@babel/preset-env", "@babel/preset-react"],
-                            plugins: [
-                                "@babel/plugin-transform-runtime",
-                                "@babel/plugin-proposal-object-rest-spread",
-                                ["@babel/plugin-proposal-decorators", {"legacy": true}],
-                                ["@babel/plugin-proposal-class-properties", {"loose": true}]
-                            ]
-                        }
-                    },
-                    {
-                        loader: 'eslint-loader'
-                    }
-                ],
+                    "babel-loader",
+                    "eslint-loader"
+                ]
             },
             {
                 test: /\.(css|scss)$/,
