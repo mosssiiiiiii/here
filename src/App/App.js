@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
-import "./styles.css";
+import "./styles.scss";
 
  class App extends Component {
     render() {
         return (
             <div className="test">
-                hello mohsen
+                    hello mohsen
             </div>
         );
     }

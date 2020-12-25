@@ -5,7 +5,7 @@ const StatsPlugin = require('stats-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 const TerserPlugin = require('terser-webpack-plugin');
 const distDir = path.resolve(process.cwd(), './dist/');
-const srcDir = path.resolve(process.cwd(), './src/');
+const srcDir = path.resolve(process.cwd(), './src/render');
 
 const client = {
         name: 'client',
@@ -47,8 +47,10 @@ const client = {
                         {
                             loader: 'sass-loader',
                             options: {
-                                // sourceMap: true,
-                                outputStyle: 'compressed',
+                                sassOptions: {
+                                    sourceMap: true,
+                                    outputStyle: 'compressed',
+                                }
                                 // includePaths: [`${srcDir}/App/App/_style/module`]
                             }
                         }
@@ -92,10 +94,6 @@ const server = {
         libraryTarget: 'commonjs2',
         publicPath: distDir,
     },
-    externals: {
-        bufferutil: 'commonjs bufferutil',
-        'utf-8-validate': 'commonjs utf-8-validate',
-    },
     module: {
         rules: [
             {
@@ -109,25 +107,7 @@ const server = {
             },
             {
                 test: /\.(css|scss)$/,
-                use: [
-                    {
-                        loader: 'isomorphic-style-loader',
-                    },
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            importLoaders: 1
-                        }
-                    },
-                    {
-                        loader: 'sass-loader',
-                        options: {
-                            // sourceMap: true,
-                            outputStyle: 'compressed',
-                            // includePaths: [`${srcDir}/App/App/_style/module`]
-                        }
-                    }
-                ]
+                use: 'ignore-loader'
             }
         ],
     },

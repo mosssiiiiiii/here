@@ -5,10 +5,9 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const srcDir = path.join(__dirname, './../../src');
 
 
-
 const client = {
     name: 'client',
-    mode:'development',
+    mode: 'development',
     target: 'web',
     entry: ['webpack-hot-middleware/client?name=client&reload=true', `${srcDir}/render/client.js`],
     output: {
@@ -29,9 +28,9 @@ const client = {
                             plugins: [
                                 "@babel/plugin-transform-runtime",
                                 "@babel/plugin-proposal-object-rest-spread",
-                                ["@babel/plugin-proposal-decorators", { "legacy": true }],
-                                ["@babel/plugin-proposal-class-properties", { "loose" : true }]
-                              ]
+                                ["@babel/plugin-proposal-decorators", {"legacy": true}],
+                                ["@babel/plugin-proposal-class-properties", {"loose": true}]
+                            ]
                         }
                     },
                     {
@@ -40,34 +39,39 @@ const client = {
                 ],
             },
             {
-              test: /\.(css|scss)$/,
+                test: /\.(css|scss)$/,
                 use: [
-                  {
-                      loader: 'css-hot-loader?cssModule=true',
-                  },
-                  {
-                      loader: MiniCssExtractPlugin.loader
-                  },
-                  {
-                      loader: 'css-loader',
-                      options: {
-                          sourceMap: true,
-                          importLoaders: 1
-                      }
-                  },
-                  {
-                      loader: 'sass-loader',
-                      options: {
-                          sourceMap: true,
-                      }
-                  }
-              ]
-          },
+                    {
+                        loader: 'css-hot-loader?cssModule=true',
+                    },
+                    {
+                        loader: MiniCssExtractPlugin.loader
+                    },
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            sourceMap: true,
+                            importLoaders: 1
+                        }
+                    },
+                    {
+                        loader: 'sass-loader',
+                        options: {
+                            sassOptions: {
+                                sourceMap: true,
+                                outputStyle: 'compressed',
+                                includePaths: path.resolve(process.cwd(), './src/App')
+                            }
+
+                        }
+                    }
+                ]
+            },
         ],
     },
     plugins: [
         new MiniCssExtractPlugin({
-            filename: 'styles.css'
+            filename: 'styles.scss'
         }),
         new Dotenv({systemvars: true}),
         new webpack.HotModuleReplacementPlugin(),
@@ -75,18 +79,15 @@ const client = {
     ]
 };
 
-const server =     {
+const server = {
     name: 'server',
-    mode:'development',
+    mode: 'development',
     target: 'node',
     entry: ['webpack-hot-middleware/client?name=server&reload=true', `${srcDir}/render/server.js`],
     output: {
         filename: 'server.js',
         libraryTarget: 'commonjs2',
         publicPath: '/dist/',
-    },
-    resolve: {
-        extensions: ['.js', '.jsx']
     },
     module: {
         rules: [
@@ -101,9 +102,9 @@ const server =     {
                             plugins: [
                                 "@babel/plugin-transform-runtime",
                                 "@babel/plugin-proposal-object-rest-spread",
-                                ["@babel/plugin-proposal-decorators", { "legacy": true }],
-                                ["@babel/plugin-proposal-class-properties", { "loose" : true }]
-                              ]
+                                ["@babel/plugin-proposal-decorators", {"legacy": true}],
+                                ["@babel/plugin-proposal-class-properties", {"loose": true}]
+                            ]
                         }
                     },
                     {
@@ -113,24 +114,7 @@ const server =     {
             },
             {
                 test: /\.(css|scss)$/,
-                use: [
-                    {
-                        loader: 'isomorphic-style-loader',
-                    },
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            sourceMap: true,
-                            importLoaders: 1
-                        }
-                    },
-                    {
-                        loader: 'sass-loader',
-                        options: {
-                            sourceMap: true,
-                        }
-                    }
-                ]
+                use: 'ignore-loader'
             }
         ],
     },
@@ -141,4 +125,4 @@ const server =     {
 }
 
 
-module.exports = [client,server];
+module.exports = [client, server];
