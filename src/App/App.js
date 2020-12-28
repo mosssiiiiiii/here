@@ -6,20 +6,19 @@ import Upload from "./component/Upload";
 
 function App() {
     const [data, setData] = useState([]);
-    const [upload, setUpload] = useState(false);
-    const [loading,setLoading] = useState(false);
+    const [loading, setLoading] = useState(false);
 
 
     useEffect(() => {
     }, [data])
 
-    console.log(data);
+
     return (
-        <div className="wrap">
+        <>
             <Logo/>
-            <Upload setLoading={setLoading} setData={setData} setUpload={setUpload} upload={upload}/>
+            <Upload setLoading={setLoading} loading={loading} setData={setData}/>
             <Address loading={loading} data={data}/>
-        </div>
+        </>
     );
 }
 

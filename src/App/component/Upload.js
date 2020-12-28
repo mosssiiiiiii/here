@@ -4,7 +4,7 @@ import {validateUploadFile} from "../action/validateUploadFile";
 import {addNameToAddress} from "../action/addNameToAddress";
 import './upload.scss';
 
-function Upload({setData, upload, setUpload,setLoading}) {
+function Upload({setData, loading, setLoading}) {
     const ref = useRef(null);
     const overDragFile = (e) => {
         e.preventDefault();
@@ -26,21 +26,23 @@ function Upload({setData, upload, setUpload,setLoading}) {
 
     const getDragFile = (e, upload) => {
         e.preventDefault();
-        setData(addressLoading)
         if (ref !== null) {
-            ref.current.style.backgroundColor = '#e3e8f1';
+            ref.current.style.backgroundColor = '#ececec';
         }
+        setData(addressLoading)
+        setLoading(true);
+
         const file = upload ? e.target.files[0] : e.dataTransfer.files[0];
-        if (file !== undefined) {
-            setUpload(true);
-        }
+
         if (validateUploadFile(file)) {
             const reader = new FileReader();
             reader.readAsText(file);
             reader.onload = (event) => {
-                addNameToAddress(JSON.parse(event.target.result), setData, setUpload,setLoading);
+                addNameToAddress(JSON.parse(event.target.result), setData, setLoading)
             };
-        }else{
+        } else {
+            ref.current.style.backgroundColor = '#e3e8f1';
+            setData([])
             setLoading(false);
         }
     }
@@ -63,7 +65,7 @@ function Upload({setData, upload, setUpload,setLoading}) {
                     >
 
                         {
-                            !upload ?
+                            !loading ?
                                 <>
                                     <img src="/asset/download.svg" alt=""/>
 

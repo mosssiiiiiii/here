@@ -1,19 +1,21 @@
-import axios from "axios";
-import {api} from "../../setup/api";
-import {token} from "../../setup/token";
+const axios = require("axios");
+const {api} = require("../../setup/api");
 
-export const getAddressListFromApi = function(lat,long) {
+const getAddressListFromApi = function (lat, long) {
 
-    return new Promise((resolve,reject) =>{
+    return new Promise((resolve, reject) => {
         axios({
-            url: api.address(lat,long, token)
+            url: api.address(lat, long, process.env.TOKEN)
         })
-            .then( response => {
-                resolve(response.data.items[0]);
+            .then(response => {
+                resolve(response.data);
             })
-            .catch(function (err) {
-                console.log(err.response)
-                reject();
+            .catch(err => {
+                console.log('err', err)
+                reject(err);
             })
+
     })
 }
+
+export {getAddressListFromApi}
