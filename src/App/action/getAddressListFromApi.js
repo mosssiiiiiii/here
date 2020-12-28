@@ -2,7 +2,8 @@ import axios from "axios";
 import {api} from "../../setup/api";
 import {token} from "../../setup/token";
 
-export const getAddressListFromApi = function(lat,long,name) {
+export const getAddressListFromApi = function(lat,long) {
+
     return new Promise((resolve,reject) =>{
         axios({
             url: api.address(lat,long, token)

@@ -1,0 +1,10 @@
+@import "../../setup/style/colors";
+
+.logo{
+  background-color: $white;
+  padding: 15px 0;
+  img{
+    width: 70px;
+    padding-left: 15px;
+  }
+}

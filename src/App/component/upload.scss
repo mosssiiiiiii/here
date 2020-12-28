@@ -1,0 +1,94 @@
+@import "../../setup/style/colors";
+
+.bg{
+  $color: radial-gradient(circle at 100% 50%,$green,$gold);
+  $border: 8px;
+  font-size: 100px;
+  color: green;
+  background      : url(./../../../public/asset/background.jpg) no-repeat  center;
+  background-position-x: 50%;
+  background-position-y: 50%;
+  height: 400px;
+  background-size: cover;
+  background-clip: padding-box; /* !importanté */
+  border-bottom: solid $border transparent;
+  position: relative;
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
+    z-index: -1;
+    margin-bottom: -$border; /* !importanté */
+    border-radius: inherit; /* !importanté */
+    background: $color;
+  }
+}
+.upload-wrap{
+  position: relative;
+}
+.upload-box-wrap{
+  position: absolute;
+  top: -370px;
+  width: 100%;
+  color: $white;
+  padding: 0 15px;
+  .upload-box{
+    height: 350px;
+    background-color: $gray;
+    width: 100%;
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    img{
+      $size: 85px;
+      width: $size;
+      height: $size;
+    }
+    p{
+      color: $hardGray;
+    }
+    input[type="file"] {
+      display: none;
+    }
+    label{
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 20px;
+      &:hover{
+        color: $green;
+      }
+    }
+
+  }
+  .title{
+    margin: 10px 0;
+    font-size: 50px;
+    width: 480px;
+    font-weight: bold;
+  }
+
+}
+
+@media (max-width: 1024px) {
+  .address-wrap{
+    $width: 50%;
+    width: $width !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .address-wrap{
+    $width: 100%;
+    width: $width !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .upload-box-wrap .title{
+    width: 350px;
+    font-size: 30px;
+  }
+}
+

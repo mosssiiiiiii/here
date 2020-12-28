@@ -1,7 +1,8 @@
 import React from 'react';
+import './logo.scss';
 
-function Logo(){
-    return(
+function Logo() {
+    return (
         <div className='logo'>
             <div className='limited'>
                 <img src="/asset/logo.svg" alt=""/>

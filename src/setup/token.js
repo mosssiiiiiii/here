@@ -1,2 +1,2 @@
-const token = 'rEMUV057EuoA7TFPoJlJeUvrVS1dsScBFRMym3Dx1Ac';
+const token = '7x0OinHMnMu-nd5ZSCC4zrOtXBATPnxqR1-isjCYWQw';
 export {token}

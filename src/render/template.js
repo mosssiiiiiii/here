@@ -3,7 +3,7 @@ export default ({markup, helmet}) => {
           <html ${helmet.htmlAttributes.toString()}>
              <head>
              <meta charSet="utf-8" />
-                <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
                 <link rel="stylesheet" type="text/css" href="/dist/styles.css" />
                 <link rel="shortcut icon" href="/favicon.ico" type="image/icon" />
                 <link rel="manifest" href="/manifest.json" />
