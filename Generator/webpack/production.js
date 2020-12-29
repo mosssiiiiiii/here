@@ -1,10 +1,13 @@
+process.env.NODE_ENV = 'production';
+
 const webpack = require('webpack');
 const path = require('path');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const StatsPlugin = require('stats-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 const TerserPlugin = require('terser-webpack-plugin');
-const distDir = path.resolve(process.cwd(), './dist');
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const distDir = path.resolve(process.cwd(), '.' + '/dist');
 const srcDir = path.resolve(process.cwd(), './src/render');
 
 const client = {
@@ -33,14 +36,15 @@ const client = {
                     test: /\.(css|scss)$/,
                     use: [
                         {
-                            loader: MiniCssExtractPlugin.loader
+                            loader: MiniCssExtractPlugin.loader,
+                            options: {
+                                publicPath: '/public',
+                            },
                         },
                         {
                             loader: 'css-loader',
                             options: {
-                                // modules: true,
-                                // localIdentName: '[local]__[hash:base64:5]',
-                                // sourceMap: true,
+                                sourceMap: true,
                                 importLoaders: 1
                             }
                         },
@@ -51,18 +55,27 @@ const client = {
                                     sourceMap: true,
                                     outputStyle: 'compressed',
                                 }
-                                // includePaths: [`${srcDir}/App/App/_style/module`]
                             }
-                        }
+                        },
+
                     ]
-                }
+                },
+                {
+                    test: /\.(png|jpg|svg|ico)$/,
+                    loader: 'url-loader'
+                },
             ],
         },
         plugins: [
             new MiniCssExtractPlugin({
                 filename: 'styles.css'
             }),
+            new webpack.ProvidePlugin({
+                $: "jquery",
+                jQuery: "jquery"
+            }),
             new Dotenv({systemvars: true}),
+            new webpack.HotModuleReplacementPlugin(),
         ],
         optimization: {
             minimize: true,
@@ -78,6 +91,9 @@ const client = {
                     },
                     extractComments: false,
                 }),
+                new OptimizeCssAssetsPlugin({
+                    cssProcessorOptions: {discardComments: {removeAll: true}}
+                })
             ]
         }
     };
