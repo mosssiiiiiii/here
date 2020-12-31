@@ -4,16 +4,14 @@ This project just for here company front-end developer job postion
 
 ## Getting started
 
-Due Here developer rest API token is enabled just about one hour , you can change enable token just inside 
-.env
- file in the main route 
+Since HERE developer rest API token is enabled just about one hour, you can change token just inside ```.env``` file
 
 for installation this project , you just need install npm in the main routh
 bash
 ```npm install```
 
 ## Running
-if you want to run in development mode , you just run :
+If you want to run in development mode , you just run:
 
 ```bash
 npm run dev
@@ -22,7 +20,7 @@ this project running in
 ```//https:localhost:7000```
 
 \
-if you want to build production mode , At first run :
+if you want to build production mode , at first run :
 
 ```bash
 npm run build
