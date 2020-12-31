@@ -33,8 +33,10 @@
   color: $white;
   padding: 0 15px;
   .upload-box{
+    padding: 15px;
     height: 350px;
-    background-color: $gray;
+    background-color: $white;
+    box-shadow: 0 2px 23px 0 #3e454d54;
     width: 100%;
     margin-top: 15px;
     display: flex;

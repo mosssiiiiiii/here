@@ -1,16 +1,14 @@
-import React, {useRef} from 'react';
-import {addressLoading} from "../../setup/loading";
+import React from 'react';
+import {toast} from 'react-toastify';
 import {validateUploadFile} from "../action/validateUploadFile";
-import {addNameToAddress} from "../action/addNameToAddress";
+import {createNewData} from "../action/createNewData";
+//styles
 import './upload.scss';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Upload({setData, loading, setLoading}) {
-    const ref = useRef(null);
     const overDragFile = (e) => {
         e.preventDefault();
-        if (ref !== null) {
-            ref.current.style.backgroundColor = '#d1d7d7';
-        }
     }
 
     const enterDragFile = (e) => {
@@ -19,32 +17,26 @@ function Upload({setData, loading, setLoading}) {
 
     const exitDragFile = (e) => {
         e.preventDefault();
-        if (ref !== null) {
-            ref.current.style.backgroundColor = '#e3e8f1';
-        }
+
     }
 
     const getDragFile = (e, upload) => {
         e.preventDefault();
-        if (ref !== null) {
-            ref.current.style.backgroundColor = '#ececec';
-        }
-        setData(addressLoading)
         setLoading(true);
-
         const file = upload ? e.target.files[0] : e.dataTransfer.files[0];
 
-        if (validateUploadFile(file)) {
-            const reader = new FileReader();
-            reader.readAsText(file);
-            reader.onload = (event) => {
-                addNameToAddress(JSON.parse(event.target.result), setData, setLoading)
-            };
-        } else {
-            ref.current.style.backgroundColor = '#e3e8f1';
-            setData([])
+        if (!validateUploadFile(file)) {
+            toast.error(` ${file.type} is not valid file. you are just allowed to input JSON files`)
             setLoading(false);
+            return null;
         }
+
+
+        const reader = new FileReader();
+        reader.readAsText(file);
+        reader.onload = (event) => {
+            createNewData(JSON.parse(event.target.result), setData, setLoading)
+        };
     }
 
 
@@ -61,7 +53,6 @@ function Upload({setData, loading, setLoading}) {
                          onDragEnter={enterDragFile}
                          onDragLeave={exitDragFile}
                          onDrop={getDragFile}
-                         ref={ref}
                     >
 
                         {
@@ -70,12 +61,13 @@ function Upload({setData, loading, setLoading}) {
                                     <img src="/asset/download.svg" alt=""/>
 
                                     <p>
-                                        <input onChange={(e) => getDragFile(e, true)} type="file" name="file" id="file"
+                                        <input onChange={(e) => getDragFile(e, true)} type="file"
+                                               accept="application/JSON" id="file"
                                                className="inputfile"/>
                                         <label htmlFor="file">Choose a file </label>
                                         or drag JSON files here and waiting for uploading
                                     </p>
-                                </> : <p><strong>Uploading</strong></p>
+                                </> : <p><strong>Uploading...</strong></p>
 
                         }
                     </div>

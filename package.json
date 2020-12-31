@@ -5,7 +5,9 @@
   "scripts": {
     "dev": "node generator/express/development.js",
     "build": "webpack -p --config ./generator/webpack/production.js --progress --profile --colors",
-    "start": "node ./generator/express/production.js ",
+    "prod": "node ./generator/express/production.js ",
+    "pm2": "pm2 --max-memory-restart 192M start ./generator/express/production.js --name HERE --node-args='--max-old-space-size=8000' --merge-logs -f",
+    "up": "pm2 delete HERE && npm run pm2 -- -i max",
     "test": "jest"
   },
   "author": "mohsen haghighatkhah",
@@ -58,8 +60,11 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "jest": "^26.6.3",
+    "pm2": "^4.5.1",
     "react-helmet": "^6.1.0",
     "react-router-dom": "^5.2.0",
+    "react-test-renderer": "^17.0.1",
+    "react-toastify": "^6.2.0",
     "serialize-javascript": "^4.0.0",
     "stats-webpack-plugin": "^0.7.0",
     "webpack-dev-server": "^3.11.0"

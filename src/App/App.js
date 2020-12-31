@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import { ToastContainer } from 'react-toastify';
 import "../setup/style/styles.scss";
 import Logo from "./component/Logo";
 import Address from "./component/Address";
@@ -18,6 +19,7 @@ function App() {
             <Logo/>
             <Upload setLoading={setLoading} loading={loading} setData={setData}/>
             <Address loading={loading} data={data}/>
+            <ToastContainer/>
         </>
     );
 }
