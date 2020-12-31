@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "description": "This project is just for doing Here's project for the front-end job position",
   "scripts": {
-    "dev": "node provider/express/development.js",
+    "dev": "node provider/server/development.js",
     "build": "webpack -p --config provider/webpack/production.js --progress --profile --colors",
-    "prod": "node provider/express/production.js ",
-    "pm2": "pm2 --max-memory-restart 192M start provider/express/production.js --name HERE --node-args='--max-old-space-size=8000' --merge-logs -f",
+    "prod": "node provider/server/production.js ",
+    "pm2": "pm2 --max-memory-restart 192M start provider/server/production.js --name HERE --node-args='--max-old-space-size=8000' --merge-logs -f",
     "up": "pm2 delete HERE && npm run pm2 -- -i max",
     "test": "jest"
   },
