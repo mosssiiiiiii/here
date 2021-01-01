@@ -1,7 +1,12 @@
 import {toast} from "react-toastify";
 
 export const validateJson = (data) => {
-    if (!Array.isArray(data)) {
+    if(!isValidJson(data)){
+        toast.error(`Your input JSON is not valid `)
+        return false;
+    }
+    data = JSON.parse(data);
+    if (!Array.isArray(JSON.parse(data))) {
         toast.error(`Your input JSON is not valid`)
         return false;
     }
@@ -25,4 +30,13 @@ export const validateJson = (data) => {
     }
 
     return true;
+}
+
+function isValidJson(json) {
+    try {
+        JSON.parse(json);
+        return true;
+    } catch (e) {
+        return false;
+    }
 }

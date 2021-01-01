@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { ToastContainer } from 'react-toastify';
+import {Helmet} from "react-helmet-async";
 import "../setup/style/styles.scss";
 import Logo from "./component/Logo";
 import Address from "./component/Address";
@@ -16,6 +17,7 @@ function App() {
 
     return (
         <>
+            <Helmet defaultTitle="HERE Technologies | The world & #1 location platform"/>
             <Logo/>
             <Upload setLoading={setLoading} loading={loading} setData={setData}/>
             <Address loading={loading} data={data}/>

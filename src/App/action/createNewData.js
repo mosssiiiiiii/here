@@ -10,6 +10,8 @@ export const createNewData = function (data, setData, setLoading) {
         return null;
     }
 
+    data = JSON.parse(data);
+
     setData(addressLoading);
     const addName = addNameToAddressData(data);
     const array = addName[0];

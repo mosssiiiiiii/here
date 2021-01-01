@@ -34,8 +34,11 @@ function Upload({setData, loading, setLoading}) {
 
         const reader = new FileReader();
         reader.readAsText(file);
+
+
+
         reader.onload = (event) => {
-            createNewData(JSON.parse(event.target.result), setData, setLoading)
+            createNewData(event.target.result, setData, setLoading)
         };
     }
 
