@@ -10,8 +10,6 @@ export const createNewData = function (data, setData, setLoading) {
         return null;
     }
 
-    data = JSON.parse(data);
-
     setData(addressLoading);
     const addName = addNameToAddressData(data);
     const array = addName[0];
@@ -35,6 +33,7 @@ export const createNewData = function (data, setData, setLoading) {
 
 export const addNameToAddressData = (data) => {
     let array = [];
+    data = JSON.parse(data);
     const actions = data.map(async item => {
         console.log('latitude', item.Latitude);
         let newItem = await getAddressListFromApi(item.Latitude, item.Longitude);
