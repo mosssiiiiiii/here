@@ -9,21 +9,22 @@ export const createNewData = function (data, setData, setLoading) {
         setLoading(false);
         return null;
     }
-
     setData(addressLoading);
-    const addName = addNameToAddressData(data);
-    const array = addName[0];
-    const actions = addName[1];
+    const {array,actions} = addNameToAddressData(data);
     Promise.all(actions)
         .then(() => {
             toast.success(`Your data has been uploaded successfully`)
             setData(array);
         })
         .catch((err) => {
-            if (err.status === 401) {
-                toast.error(`Your token is expired or invalid `)
+            if(err === undefined){
+                toast.error(`Something is wrong`)
                 setData([])
             }
+            if (err.status === 401) {
+                toast.error(`Your token is expired or invalid `)
+            }
+
         })
         .finally(() => {
             setLoading(false);
@@ -35,12 +36,11 @@ export const addNameToAddressData = (data) => {
     let array = [];
     data = JSON.parse(data);
     const actions = data.map(async item => {
-        console.log('latitude', item.Latitude);
         let newItem = await getAddressListFromApi(item.Latitude, item.Longitude);
         newItem = newItem.items[0];
         newItem.name = item.Name;
         array.push(newItem);
     })
 
-    return [array, actions];
+    return {array, actions};
 }
