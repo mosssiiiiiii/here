@@ -33,7 +33,6 @@
       a {
         display: flex;
         text-decoration: none;
-        margin-left: 10px;
         color: $hardGray;
         position: absolute;
         bottom: 20px;
@@ -46,8 +45,8 @@
 
         p {
           visibility: hidden;
-          margin: 0;
           opacity: 0;
+          margin: 3px 0 0 0;
           transition: visibility 0s, opacity 0.5s linear;
         }
 
