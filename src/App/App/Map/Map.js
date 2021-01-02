@@ -9,12 +9,10 @@ function Map({match}) {
     const [data, setData] = useState([]);
     const refContainer = useRef();
 
-
     useEffect(() => {
         const H = isClient && window.H;
         let platform = mapAdapter(H);
         const defaultLayers = platform.createDefaultLayers();
-        console.log(match.params.name);
         const maps = new H.Map(
             refContainer.current,
             defaultLayers.vector.normal.map,
@@ -31,18 +29,14 @@ function Map({match}) {
                 setData(item.items[0]);
             })
 
-// Create an icon, an object holding the latitude and longitude, and a marker:
         let icon = new H.map.Icon('/asset/marker.svg'),
             coords = {lat: match.params.lat, lng: match.params.long},
             marker = new H.map.Marker(coords, {icon: icon});
 
-// Add the marker to the map and center the map at the location of the marker:
         maps.addObject(marker);
         maps.setCenter(coords);
 
         var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(maps));
-
-        // Create the default UI components
         var ui = H.ui.UI.createDefault(maps, defaultLayers);
 
         setMap(maps);
@@ -51,7 +45,6 @@ function Map({match}) {
     useEffect(() => {
     }, [data])
 
-    console.log(data);
     return (
         <>
             <div className="limited address-title">
