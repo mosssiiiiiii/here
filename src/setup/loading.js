@@ -1,10 +1,11 @@
 const addressLoading = [
-    {name:'', address:''},
-    {name:'', address:'',},
-    {name:'', address:'',},
-    {name:'', address:'',},
-    {name:'', address:'',},
-    {name:'', address:'',},
+    {name:'', address:'',position:{lat:'',lng:''}},
+    {name:'', address:'',position:{lat:'',lng:''}},
+    {name:'', address:'',position:{lat:'',lng:''}},
+    {name:'', address:'',position:{lat:'',lng:''}},
+    {name:'', address:'',position:{lat:'',lng:''}},
+    {name:'', address:'',position:{lat:'',lng:''}},
+
 ]
 
 export {addressLoading}

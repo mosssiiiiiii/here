@@ -1,13 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import { ToastContainer } from 'react-toastify';
 import {Helmet} from "react-helmet-async";
-import "../setup/style/styles.scss";
-import Logo from "./component/Logo";
-import Address from "./component/Address";
-import Upload from "./component/Upload";
+import "../../../setup/style/styles.scss";
+import Address from "./Address";
+import Upload from "./Upload";
 
-function App() {
-    const [data, setData] = useState([]);
+function Home() {
+    const [data, setData] = useState(null);
     const [loading, setLoading] = useState(false);
 
 
@@ -18,13 +17,13 @@ function App() {
     return (
         <>
             <Helmet defaultTitle="HERE Technologies | The world & #1 location platform"/>
-            <Logo/>
             <Upload setLoading={setLoading} loading={loading} setData={setData}/>
             <Address loading={loading} data={data}/>
             <ToastContainer/>
+
         </>
     );
 }
 
 
-export default App;
+export default Home;

@@ -1,4 +1,4 @@
-const {validateUploadFile} = require('./../validateUploadFile');
+const {validateUploadFile} = require('../action/validateUploadFile');
 
 //file upload mocks
 const json = {

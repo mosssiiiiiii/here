@@ -1,4 +1,4 @@
-@import "../../setup/style/colors";
+@import "../../../setup/style/colors";
 
 .bg{
   $color: radial-gradient(circle at 100% 50%,$green,$gold);
@@ -36,7 +36,8 @@
     padding: 15px;
     height: 350px;
     background-color: $white;
-    box-shadow: 0 2px 23px 0 #3e454d54;
+    -webkit-box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 20px 0 rgba(0, 0, 0, .1);
     width: 100%;
     margin-top: 15px;
     display: flex;

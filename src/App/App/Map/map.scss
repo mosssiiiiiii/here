@@ -1,0 +1,39 @@
+@import "../../../setup/style/colors";
+
+.map-wrap{
+  padding: 0 15px;
+  .map{
+    height: 500px;
+    -webkit-box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 20px 0 rgba(0, 0, 0, .1);
+  }
+}
+
+
+.address-title{
+  display: block;
+  margin-bottom: 35px;
+  padding: 0 15px;
+  p{
+    position: relative;
+    padding-left: 15px;
+    &:before{
+      content:'';
+      position: absolute;
+      top:5px;
+      left: 0;
+      width: 8px;
+      height: 8px;
+      background-color: $hereGreen;
+      border-radius: 100%;
+
+
+    }
+  }
+  h1{
+    font-weight: bold;
+    font-size: 45px;
+  }
+}
+
+

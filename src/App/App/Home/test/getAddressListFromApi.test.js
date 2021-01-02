@@ -1,7 +1,7 @@
 const axios = require('axios');
 const MockAdapter = require('axios-mock-adapter')
-const {getAddressListFromApi} = require('./../getAddressListFromApi')
-const {api} = require('./../../../setup/api');
+const {getAddressListFromApi} = require('../action/getAddressListFromApi')
+const {api} = require('../../../../setup/api');
 
 const lat = 52.56222;
 const long = 13.35125;

@@ -1,9 +1,9 @@
 import React from 'react';
-import './logo.scss';
+import './header.scss';
 
-function Logo() {
+function Header() {
     return (
-        <div className='logo'>
+        <div className='header'>
             <div className='limited'>
                 <img src="/asset/logo.svg" alt=""/>
             </div>
@@ -12,4 +12,4 @@ function Logo() {
 }
 
 
-export default Logo;
+export default Header;

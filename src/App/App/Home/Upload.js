@@ -1,7 +1,7 @@
 import React from 'react';
 import {toast} from 'react-toastify';
-import {validateUploadFile} from "../action/validateUploadFile";
-import {createNewData} from "../action/createNewData";
+import {validateUploadFile} from "./action/validateUploadFile";
+import {createNewData} from "./action/createNewData";
 //styles
 import './upload.scss';
 import 'react-toastify/dist/ReactToastify.css';
@@ -34,9 +34,6 @@ function Upload({setData, loading, setLoading}) {
 
         const reader = new FileReader();
         reader.readAsText(file);
-
-
-
         reader.onload = (event) => {
             createNewData(event.target.result, setData, setLoading)
         };

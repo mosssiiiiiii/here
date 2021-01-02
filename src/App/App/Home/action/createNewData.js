@@ -1,15 +1,17 @@
 import {getAddressListFromApi} from "./getAddressListFromApi";
 import {toast} from "react-toastify";
-import {addressLoading} from "../../setup/loading";
+import {addressLoading} from "../../../../setup/loading";
 import {validateJson} from "./validateJson";
+import {addNameToAddressData} from "./addNameToAddressData";
 
 export const createNewData = function (data, setData, setLoading) {
     setLoading(true)
+    setData(addressLoading);
     if (!validateJson(data)) {
         setLoading(false);
+        setData(null);
         return null;
     }
-    setData(addressLoading);
     const {array,actions} = addNameToAddressData(data);
     Promise.all(actions)
         .then(() => {
@@ -17,14 +19,13 @@ export const createNewData = function (data, setData, setLoading) {
             setData(array);
         })
         .catch((err) => {
+            setData(null)
             if(err === undefined){
                 toast.error(`Something is wrong`)
-                setData([])
             }
             if (err.status === 401) {
                 toast.error(`Your token is expired or invalid `)
             }
-
         })
         .finally(() => {
             setLoading(false);
@@ -32,15 +33,4 @@ export const createNewData = function (data, setData, setLoading) {
 }
 
 
-export const addNameToAddressData = (data) => {
-    let array = [];
-    data = JSON.parse(data);
-    const actions = data.map(async item => {
-        let newItem = await getAddressListFromApi(item.Latitude, item.Longitude);
-        newItem = newItem.items[0];
-        newItem.name = item.Name;
-        array.push(newItem);
-    })
 
-    return {array, actions};
-}

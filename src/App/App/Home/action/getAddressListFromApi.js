@@ -1,5 +1,5 @@
 const axios = require("axios");
-const {api} = require("../../setup/api");
+const {api} = require("../../../../setup/api");
 
 
 const getAddressListFromApi = function (lat, long) {

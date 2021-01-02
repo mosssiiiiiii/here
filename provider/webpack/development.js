@@ -9,6 +9,7 @@ const client = {
     target: 'web',
     entry: ['webpack-hot-middleware/client?name=client&reload=true', `./src/render/client.js`],
     output: {
+        globalObject: 'this',
         filename: 'client.js',
         publicPath: '/dist',
     },
@@ -88,6 +89,7 @@ const server = {
     entry: ['webpack-hot-middleware/client?name=server&reload=true', `./src/render/server.js`],
     output: {
         filename: 'server.js',
+        globalObject: 'this',
         libraryTarget: 'commonjs2',
         publicPath: '/dist',
     },

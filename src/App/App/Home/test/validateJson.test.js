@@ -1,4 +1,4 @@
-const {validateJson} = require('./../validateJson');
+const {validateJson} = require('../action/validateJson');
 
 const data1 = [];
 const data2 = {name: 'test'}
