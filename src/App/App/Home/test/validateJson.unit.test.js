@@ -1,9 +1,9 @@
 const {validateJson} = require('../action/validateJson');
 
 const data1 = [];
-const data2 = {name: 'test'}
-const data3 = [{Name: 'test', Longitude: 52.12}]
-const data4 = [{Name: 'test', Longitude: 52.12, Latitude: 13.25, Family: 'test'}]
+const data2 = JSON.stringify({name: 'test'})
+const data3 = JSON.stringify([{Name: 'test', Longitude: 52.12}])
+const data4 = JSON.stringify([{Name: 'test', Longitude: 52.12, Latitude: 13.25, Family: 'test'}]);
 
 describe('validate json file', () => {
     test('is empty', () => {

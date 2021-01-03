@@ -3,7 +3,7 @@ import './address.scss';
 import {route} from "../../../setup/route";
 import {Link} from 'react-router-dom';
 function Address({data,loading}) {
-    console.log(data);
+
     return (
         <div className="limited list-wrap">
             {

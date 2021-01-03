@@ -11,7 +11,9 @@ function Map({match}) {
 
     useEffect(() => {
         const H = isClient && window.H;
+        console.log('h',H);
         let platform = mapAdapter(H);
+        console.log('platform',platform);
         const defaultLayers = platform.createDefaultLayers();
         const maps = new H.Map(
             refContainer.current,

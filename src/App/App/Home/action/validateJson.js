@@ -1,6 +1,7 @@
 import {toast} from "react-toastify";
 
 export const validateJson = (data) => {
+
     if(!isValidJson(data)){
         toast.error(`Your input JSON is not valid `)
         return false;
